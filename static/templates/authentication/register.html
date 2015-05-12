@@ -1,6 +1,10 @@
 <div class="col-md-4 col-md-offset-4">
 	<h1>Register</h1>
 
+	<span ng-show="vm.message">
+		hello
+	</span>
+
 	<div class="well">
 		<form role="form" name="authForm" ng-submit="vm.register()">
 			<div class="form-group">
