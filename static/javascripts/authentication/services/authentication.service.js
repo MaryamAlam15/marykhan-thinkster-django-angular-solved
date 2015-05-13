@@ -1,18 +1,20 @@
 (function () {
-    'use strict';
+//    'use strict';
 
     angular
         .module('thinkster.authentication.services')
         .factory('AuthenticationService', AuthenticationService);
 
     function AuthenticationService($cookies, $http) {
+
         var authService = {
             getAuthenticatedAccount: getAuthenticatedAccount,
             isAuthenticated: isAuthenticated,
             login: login,
             register: register,
             setAuthenticatedAccount: setAuthenticatedAccount,
-            unauthenticate: unauthenticate
+            unauthenticate: unauthenticate,
+            logout: logout
         };
 
         return authService;
@@ -22,11 +24,12 @@
                 username: username,
                 password: password,
                 email: email
-            }).then(registerSuccessFn, registerErrorFn);
+            })
+                .then(registerSuccessFn, registerErrorFn);
 
 
             function registerSuccessFn(data, status, headers, config) {
-                Authentication.login(email, password);
+                authService.login(email, password);
             }
 
             function registerErrorFn(data, status, headers, config) {
@@ -39,20 +42,12 @@
                 email: email, password: password
             }).then(loginSuccessFn, loginErrorFn);
 
-            /**
-             * @name loginSuccessFn
-             * @desc Set the authenticated account and redirect to index
-             */
             function loginSuccessFn(data, status, headers, config) {
                 authService.setAuthenticatedAccount(data.data);
 
                 window.location = '/';
             }
 
-            /**
-             * @name loginErrorFn
-             * @desc Log "Epic failure!" to the console
-             */
             function loginErrorFn(data, status, headers, config) {
                 console.error('Epic failure!');
             }
@@ -68,7 +63,8 @@
 
 
         function isAuthenticated() {
-            return !!$cookies.authenticatedAccount;
+//            return !!$cookies.authenticatedAccount; // works in chrome
+            return !!Boolean($cookies.authenticatedAccount); // works in ff
         }
 
         function setAuthenticatedAccount(account) {
@@ -78,6 +74,21 @@
 
         function unauthenticate() {
             delete $cookies.authenticatedAccount;
+        }
+
+        function logout() {
+            return $http.post('/api/v1/auth/logout/')
+                .then(logoutSuccessFn, logoutErrorFn);
+
+            function logoutSuccessFn(data, status, headers, config) {
+                authService.unauthenticate();
+
+                window.location = '/';
+            }
+
+            function logoutErrorFn(data, status, headers, config) {
+                console.error('Epic failure!');
+            }
         }
 
     }

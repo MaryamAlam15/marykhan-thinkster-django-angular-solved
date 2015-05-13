@@ -1,10 +1,11 @@
-(function(){
+(function () {
     console.log("thinkster.js");
     angular
         .module('thinkster', [
-        'thinkster.routes',
-        'thinkster.authentication',
-        'thinkster.config'
+            'thinkster.routes',
+            'thinkster.authentication',
+            'thinkster.config',
+            'thinkster.layout'
         ]);
 
     angular
@@ -19,7 +20,7 @@
 
     run.$inject = ['$http'];
 
-    function run($http){
+    function run($http) {
         $http.defaults.xsrfHeaderName = 'X-CSRFToken';
         $http.defaults.xsrfCookieName = 'csrftoken';
     }
