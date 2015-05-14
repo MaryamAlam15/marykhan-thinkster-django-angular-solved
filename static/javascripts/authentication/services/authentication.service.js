@@ -28,7 +28,7 @@
 
 
             function registerSuccessFn(data, status, headers, config) {
-                authService.login(email, password);
+                authService.login(scope, email, password);
             }
 
             function registerErrorFn(data, status, headers, config) {

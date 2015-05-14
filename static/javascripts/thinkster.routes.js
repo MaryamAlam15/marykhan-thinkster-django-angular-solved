@@ -3,7 +3,6 @@
  */
 
 (function () {
-    console.log('routes');
 
     angular
         .module('thinkster.routes')
