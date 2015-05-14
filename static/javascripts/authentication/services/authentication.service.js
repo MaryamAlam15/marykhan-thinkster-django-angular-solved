@@ -19,13 +19,12 @@
 
         return authService;
 
-        function register(email, password, username) {
+        function register(scope, email, password, username) {
             return $http.post('/api/v1/accounts/', {
                 username: username,
                 password: password,
                 email: email
-            })
-                .then(registerSuccessFn, registerErrorFn);
+            }).then(registerSuccessFn, registerErrorFn);
 
 
             function registerSuccessFn(data, status, headers, config) {
@@ -33,11 +32,17 @@
             }
 
             function registerErrorFn(data, status, headers, config) {
-                console.error('Epic failure!');
+                if (data.data.email)
+                    scope.email_error = data.data.email[0];
+                if (data.data.username)
+                    scope.email_error = data.data.username[0];
+
             }
         }
 
-        function login(email, password) {
+//      ################################################################################################################
+
+        function login(scope, email, password) {
             return $http.post('/api/v1/auth/login/', {
                 email: email, password: password
             }).then(loginSuccessFn, loginErrorFn);
@@ -49,9 +54,11 @@
             }
 
             function loginErrorFn(data, status, headers, config) {
-                console.error('Epic failure!');
+                scope.error = data.data.message;
             }
         }
+
+//    #################################################################################################################
 
         function getAuthenticatedAccount() {
             if (!$cookies.authenticatedAccount) {
@@ -75,6 +82,9 @@
         function unauthenticate() {
             delete $cookies.authenticatedAccount;
         }
+
+
+//    #################################################################################################################
 
         function logout() {
             return $http.post('/api/v1/auth/logout/')

@@ -4,33 +4,33 @@
 
 
 (function () {
-  'use strict';
+    'use strict';
 
-  angular
-    .module('thinkster.authentication.controllers')
-    .controller('LoginController', LoginController);
+    angular
+        .module('thinkster.authentication.controllers')
+        .controller('LoginController', LoginController);
 
-  LoginController.$inject = ['$location', '$scope', 'AuthenticationService'];
+    LoginController.$inject = ['$location', '$scope', 'AuthenticationService'];
 
-  /**
-  * @namespace LoginController
-  */
-  function LoginController($location, $scope, AuthenticationService) {
-    var vm = this;
+    /**
+     * @namespace LoginController
+     */
+    function LoginController($location, $scope, AuthenticationService) {
+        var vm = this;
 
-    vm.login = login;
+        vm.login = login;
 
-    activate();
+        activate();
 
-    function activate() {
-      // If the user is authenticated, they should not be here.
-      if (AuthenticationService.isAuthenticated()) {
-        $location.url('/');
-      }
+        function activate() {
+            // If the user is authenticated, they should not be here.
+            if (AuthenticationService.isAuthenticated()) {
+                $location.url('/');
+            }
+        }
+
+        function login() {
+            AuthenticationService.login($scope, vm.email, vm.password);
+        }
     }
-
-    function login() {
-      AuthenticationService.login(vm.email, vm.password);
-    }
-  }
 })();

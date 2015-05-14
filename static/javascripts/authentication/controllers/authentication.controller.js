@@ -17,7 +17,7 @@
         activate();
 
         function register() {
-            AuthenticationService.register(vm.email, vm.password, vm.username);
+            AuthenticationService.register($scope, vm.email, vm.password, vm.username);
         }
 
         function activate() {
