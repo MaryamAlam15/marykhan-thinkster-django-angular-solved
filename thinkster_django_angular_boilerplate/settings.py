@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'compressor',
     'thinkster_django_angular_boilerplate',
     'authentication',
+    'posts',
 )
 
 MIDDLEWARE_CLASSES = (
