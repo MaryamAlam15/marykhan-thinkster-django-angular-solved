@@ -7,6 +7,7 @@
             'thinkster.config',
             'thinkster.layout',
             'thinkster.posts',
+            'thinkster.profiles',
             'thinkster.utils'
         ]);
 

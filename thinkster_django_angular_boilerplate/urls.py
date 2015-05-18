@@ -12,7 +12,7 @@ router.register(r'posts', PostViewSet)
 accounts_router = routers.NestedSimpleRouter(
     router, r'accounts', lookup='account'
 )
-# accounts_router.register(r'posts', AccountPostsViewSet)
+accounts_router.register(r'posts', AccountPostsViewSet)
 
 urlpatterns = patterns(
     '',
