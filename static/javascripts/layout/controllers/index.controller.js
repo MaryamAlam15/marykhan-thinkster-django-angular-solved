@@ -12,6 +12,7 @@
     IndexController.$inject = ['$scope', 'AuthenticationService', 'Posts', 'Snackbar'];
 
     function IndexController($scope, AuthenticationService, Posts, Snackbar){
+        console.log("index controller");
         var vm = this;
         vm.authenticated = AuthenticationService.isAuthenticated();
         vm.posts = [];

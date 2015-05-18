@@ -20,10 +20,10 @@
 
 
         function _snackbar(content, options) {
-            options = _.extends({timeout: 3000}, options);
+            options = _.extend({timeout: 3000}, options);
             options.content = content;
 
-            return options;
+            $.snackbar(options);
 
         }
 
