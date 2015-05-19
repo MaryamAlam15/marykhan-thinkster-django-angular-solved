@@ -15,6 +15,7 @@
     var vm = this;
 
     vm.logout = logout;
+    vm.authenticated = AuthenticationService.isAuthenticated();
 
     function logout() {
       AuthenticationService.logout();

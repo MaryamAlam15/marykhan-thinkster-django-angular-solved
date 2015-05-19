@@ -70,11 +70,14 @@
 
 
         function isAuthenticated() {
+            console.log("isAuthenticated: " + !!Boolean($cookies.authenticatedAccount));
+            console.log($cookies.authenticatedAccount);
 //            return !!$cookies.authenticatedAccount; // works in chrome
             return !!Boolean($cookies.authenticatedAccount); // works in ff
         }
 
         function setAuthenticatedAccount(account) {
+            console.log("setAuthenticatedAccount: " + account);
             $cookies.authenticatedAccount = JSON.stringify(account);
         }
 

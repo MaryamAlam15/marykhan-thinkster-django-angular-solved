@@ -9,9 +9,9 @@
         .module('thinkster.profiles.services')
         .factory('Profile', Profile);
 
-    Profile.$inject = ['$http'];
+    Profile.$inject = ['$http', 'AuthenticationService'];
 
-    function Profile($http) {
+    function Profile($http, AuthenticationService) {
 
         var profile = {
             destroy: destroy,
@@ -33,7 +33,9 @@
         }
 
         function update(profile) {
-            return $http.put('/api/v1/accounts/' + profile.username + '/', profile)
+            var username = AuthenticationService.getAuthenticatedAccount().username;
+            console.log(username);
+            return $http.put('/api/v1/accounts/' + username + '/', profile)
 
         }
 
